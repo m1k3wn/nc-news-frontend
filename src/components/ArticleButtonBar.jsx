@@ -1,5 +1,4 @@
 export default function ArticleButtonBar({ article }) {
-  console.log(article, "< in button bar");
   return (
     <div className="article-buttons-bar">
       <p className="article-info-button">author: {article.author}</p>

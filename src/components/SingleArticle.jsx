@@ -2,20 +2,20 @@ import { useEffect, useState } from "react";
 import { getArticleById } from "../api";
 import { useParams } from "react-router";
 import SingleArticleCard from "./SingleArticleCard";
+import { LoadingAnimation } from "./LoadingAnimation";
+import CommentList from "./CommentList";
 
 export default function SingleArticle() {
-  const [currentArticle, setCurrentArticle] = useState([]);
+  const [currentArticle, setCurrentArticle] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
   const { article_id } = useParams();
-  console.log(article_id, "< id in single article");
 
   useEffect(() => {
     setIsLoading(true);
     getArticleById(article_id)
       .then(({ article }) => {
-        console.log(article, "< article returned in singlearticlecard");
         return article;
       })
       .then((returnedArticle) => {
@@ -28,12 +28,13 @@ export default function SingleArticle() {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingAnimation />;
   if (isError) return <p>Error fetching article </p>;
 
   return (
-    <div className="single-article-container">
+    <div className="single-article-page">
       <SingleArticleCard article={currentArticle} />
+      <CommentList article_id={currentArticle.article_id} />
     </div>
   );
 }
