@@ -8,6 +8,13 @@
   text-decoration: none;
 }
 
+/* default link styling */
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 /* Header components */
 .header-component {
   border-radius: 1rem;
@@ -86,7 +93,7 @@
   justify-content: center;
 }
 
-/* Article card */
+/* Article Summary card */
 .article-card {
   background-color: rgb(228, 218, 188);
   border-radius: 1rem;
@@ -101,6 +108,12 @@
   height: auto;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.article-card:hover {
+  background-color: rgb(255, 247, 224);
+  transform: scale(1.1);
+  color: rgb(193, 123, 52);
 }
 
 .article-card-title {
@@ -145,4 +158,66 @@
   gap: 0.2rem;
   align-items: center;
   margin: 0.5rem;
+}
+
+/* Single Article Card */
+.single-article-container {
+  margin-top: 2rem;
+}
+.single-article-card {
+  border-radius: 1rem;
+  background: rgb(222, 208, 199);
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.single-article-title {
+  font-size: 3rem;
+  border-radius: 1rem;
+  background: rgb(59, 59, 59);
+  color: rgb(253, 184, 116);
+  padding: 1rem;
+}
+
+.single-article-image {
+  border-radius: 0.5rem;
+}
+
+.article-buttons-bar {
+  border-radius: 1rem;
+  background: rgb(59, 59, 59);
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: center;
+  margin: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  justify-content: center;
+  align-items: center;
+  max-width: 60vw;
+}
+
+.article-info-button {
+  border-radius: 1rem;
+  background: rgb(253, 184, 116);
+  padding: 0.5rem;
+}
+
+.article-vote-button {
+  border-radius: 1rem;
+  background: rgb(161, 230, 164);
+  padding: 0.5rem;
+}
+
+.single-article-body {
+  font-size: 1.2rem;
+  line-height: 2rem;
+  max-width: 50vw;
 }
