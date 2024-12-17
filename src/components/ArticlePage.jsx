@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import ArticleList from "./ArticleList";
 import { getArticles } from "../api";
+import { LoadingAnimation } from "./LoadingAnimation";
 
 export default function ArticlePage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,12 +13,10 @@ export default function ArticlePage() {
     setIsLoading(true);
     getArticles()
       .then(({ articles }) => {
-        return articles;
-      })
-      .then((articleData) => {
-        setArticles(articleData);
+        setArticles(articles);
         setIsError(false);
         setIsLoading(false);
+        return articles;
       })
       .catch((error) => {
         setIsError(true);
@@ -26,7 +25,8 @@ export default function ArticlePage() {
       });
   }, []);
 
-  if (isLoading) return <p>Loading...</p>;
+  if (isLoading) return <LoadingAnimation />;
+
   if (isError) return <p>Error fetching stuff</p>;
 
   return (

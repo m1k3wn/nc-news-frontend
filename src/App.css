@@ -1,6 +1,5 @@
 #root {
   margin: 0 auto;
-  padding: 1rem;
   text-align: center;
   background-color: white;
   color: black;
@@ -8,11 +7,26 @@
   text-decoration: none;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 /* default link styling */
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+/* animations and assets */
+#loading-animation {
+  width: 400px;
+  height: 400px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
 }
 
 /* Header components */
@@ -70,6 +84,7 @@ a {
   border: 1rem solid rgb(253, 184, 116);
   border-radius: 2rem;
   box-sizing: border-box;
+  margin-top: 1rem;
   line-height: 0.4rem;
   box-sizing: border-box;
   display: flex;
@@ -79,12 +94,14 @@ a {
   text-align: center;
 }
 
-.articles-list-parent-component {
+.articles-title {
+  line-height: 3rem;
 }
 
 .articles-list-component {
-  background-color: rgb(48, 48, 48);
+  background-color: rgb(86, 86, 86);
   border-radius: 1rem;
+  margin-top: 1rem;
   box-sizing: border-box;
   text-decoration: none;
   list-style-type: none;
@@ -108,6 +125,7 @@ a {
   height: auto;
   box-sizing: border-box;
   overflow: hidden;
+  gap: 1rem;
 }
 
 .article-card:hover {
@@ -134,22 +152,15 @@ a {
   border-radius: 0.5rem;
 }
 
-.article-card-topic {
-  font-size: 1.2rem;
+.article-card-info {
+  font-size: 1rem;
   color: rgb(255, 255, 255);
   background-color: rgb(100, 100, 100);
   margin: 0;
   padding: 1rem;
   border-radius: 1rem;
-}
-
-.article-card-author {
-  font-size: 1.2rem;
-  color: rgb(255, 255, 255);
-  background-color: rgb(100, 100, 100);
-  padding: 1rem;
-  border-radius: 1rem;
-  margin: 0;
+  color: rgb(33, 32, 32);
+  background-color: rgb(253, 184, 116);
 }
 
 .article-card-footer {
@@ -160,9 +171,15 @@ a {
   margin: 0.5rem;
 }
 
-/* Single Article Card */
-.single-article-container {
+/* Single Article Page */
+
+.single-article-page {
   margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 }
 .single-article-card {
   border-radius: 1rem;
@@ -174,6 +191,8 @@ a {
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
+  gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .single-article-title {
@@ -194,10 +213,8 @@ a {
   display: flex;
   flex-direction: row;
   gap: 2rem;
-  align-items: center;
   margin: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
+  padding: 0.7rem;
   font-size: 1rem;
   justify-content: center;
   align-items: center;
@@ -220,4 +237,59 @@ a {
   font-size: 1.2rem;
   line-height: 2rem;
   max-width: 50vw;
+}
+
+/* comments components */
+.comments-list-component {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  padding: 0;
+  text-align: center;
+  gap: 1rem;
+  box-sizing: border-box;
+}
+
+.comment-card {
+  border-radius: 1rem;
+  border: 0.2rem solid rgb(88, 83, 74);
+  background: rgb(250, 244, 226);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 70%;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem;
+  gap: 1rem;
+}
+
+.comment-button-bar {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-info-button {
+  background-color: rgb(253, 184, 116);
+  margin: 0;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+.comment-date-stamp {
+  background-color: rgb(139, 139, 54);
+  color: beige;
+  margin: 0;
+  padding: 0.6rem;
+  border-radius: 1rem;
 }
