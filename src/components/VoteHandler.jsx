@@ -3,15 +3,15 @@ import { updateVotesByArticleId } from "../api";
 
 export default function VoteHandler({ votes, article_id }) {
   const [votesAdded, setVotesAdded] = useState(0);
-  const [error, setError] = useState(null);
+  const [isError, setIsError] = useState(null);
   const [hasUpVoted, setHasUpVoted] = useState(false);
   const [hasDownVoted, setHasDownVoted] = useState(false);
 
   function handleClick(increment) {
-    updateVotesByArticleId(article_id, increment).catch((err) => {
+    updateVotesByArticleId(article_id, increment).catch((error) => {
       setVotesAdded((currentVotesAdded) => {
-        setError("Your vote was not successful. Please try again!");
-        console.log(err, "<error in catch block");
+        setIsError("Your vote was not successful. Please try again!");
+        console.log("Error handling vote: ", error);
         return currentVotesAdded - 1;
       });
     });
@@ -49,7 +49,7 @@ export default function VoteHandler({ votes, article_id }) {
       >
         Down Vote!
       </button>
-      {error ? <p>{error}</p> : null}
+      {isError ? <p className="error-message">{isError}</p> : null}
     </div>
   );
 }

@@ -1,14 +1,17 @@
 import { useEffect, useState } from "react";
-import { getArticleById } from "../api";
 import { useParams } from "react-router";
-import SingleArticleCard from "./SingleArticleCard";
+// resources
+import { getArticleById } from "../api";
 import { LoadingAnimation } from "./LoadingAnimation";
+// components
+import SingleArticleCard from "./SingleArticleCard";
 import CommentList from "./CommentList";
+import CommentForm from "./CommentForm";
 
 export default function SingleArticle() {
   const [currentArticle, setCurrentArticle] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(null);
 
   const { article_id } = useParams();
 
@@ -24,16 +27,18 @@ export default function SingleArticle() {
         setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error, "< error in single article card");
+        setIsError("Coudln't find this article, sorry bae");
+        console.log("Error in single article fetch: ", error);
       });
   }, []);
 
   if (isLoading) return <LoadingAnimation />;
-  if (isError) return <p>Error fetching article </p>;
+  if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="single-article-page">
       <SingleArticleCard article={currentArticle} />
+      <CommentForm article_id={currentArticle.article_id} />
       <CommentList article_id={currentArticle.article_id} />
     </div>
   );

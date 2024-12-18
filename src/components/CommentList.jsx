@@ -5,7 +5,7 @@ import { LoadingAnimation } from "./LoadingAnimation";
 
 export default function CommentList({ article_id }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(null);
   const [comments, setComments] = useState([]);
 
   useEffect(() => {
@@ -20,15 +20,15 @@ export default function CommentList({ article_id }) {
         return comments;
       })
       .catch((error) => {
-        setIsError(true);
-        console.log(error, "<error returned from util");
+        setIsError("Failed to load comments, boo...");
+        console.log("error returned from util: ", error);
       })
       .finally(() => setIsLoading(false));
   }, [article_id]);
 
   if (isLoading) return <LoadingAnimation />;
 
-  if (isError) return <p>Error fetching comments</p>;
+  if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="comments-component">
