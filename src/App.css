@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap");
+
 #root {
   margin: 0 auto;
   text-align: center;
@@ -20,6 +22,13 @@ a {
   color: inherit;
 }
 
+button {
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
 /* animations and assets */
 #loading-animation {
   width: 400px;
@@ -31,7 +40,7 @@ a {
 
 /* Header components */
 .header-component {
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
   background: grey;
   box-sizing: border-box;
   box-sizing: border-box;
@@ -44,7 +53,7 @@ a {
 }
 
 .home-logo-link {
-  background-color: beige;
+  background-color: rgb(253, 184, 116);
   padding: 1rem;
   border-radius: 1rem;
   font-size: 2rem;
@@ -59,9 +68,11 @@ a {
 
 .main-app-title {
   padding: 1rem;
-  margin: 0;
+  margin-left: 3.5rem;
   font-size: 3rem;
   text-align: center;
+  font-family: "Luckiest Guy";
+  color: rgb(255, 222, 189);
 }
 
 .header-user-logo {
@@ -237,6 +248,40 @@ a {
   font-size: 1.2rem;
   line-height: 2rem;
   max-width: 50vw;
+}
+
+/* Article Vote Component */
+#article-vote-handler {
+  background-color: pink;
+  border-radius: 1rem;
+  padding: 0.3rem;
+  display: flex;
+  flex-direction: row;
+  gap: 0.2rem;
+}
+
+.vote-button {
+  font-size: 1rem;
+  margin: 0.2rem;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  background-color: rgb(81, 95, 18);
+  color: white;
+}
+
+.vote-button:hover {
+  background-color: rgb(121, 139, 43);
+  transform: scale(1.1);
+}
+
+.vote-button:disabled {
+  background-color: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+#votes-count {
+  font-size: 1.2rem;
 }
 
 /* comments components */
