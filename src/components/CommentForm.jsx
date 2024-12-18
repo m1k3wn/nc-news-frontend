@@ -2,34 +2,47 @@ import { useState } from "react";
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { postArticleComment } from "../api";
+import CommentCard from "./CommentCard";
 
 export default function CommentForm({ article_id }) {
   const { user } = useContext(UserContext);
-  const [comment, setComment] = useState("");
+  const [newComment, setNewComment] = useState("");
+  const [isPosted, setIsPosted] = useState(false);
+  // gathers new comments to optimistically render
+  const [commentAdded, setCommentAdded] = useState([]);
   const [isError, setIsError] = useState(null);
-  const [isPosted, setIsPosted] = useState(null);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (!comment.trim()) {
+    if (!newComment.trim()) {
       setIsError("Say something!");
       return;
     }
-    postArticleComment(article_id, user, comment)
-      .then(() => {
-        setComment("");
-        setIsPosted("Comment posted!");
+
+    postArticleComment(article_id, user, newComment)
+      .then(({ comment }) => {
+        setNewComment("");
+        setIsPosted(true);
+        setCommentAdded((prevComments) => [comment, ...prevComments]);
         setIsError(null);
       })
       .catch((error) => {
         setIsError("Failed to Submit Comment, soz :(");
+        setCommentAdded(null);
+        setIsPosted(false);
         console.log("Error posting comment: ", error);
       });
   };
 
   const handleChange = (event) => {
-    setComment(event.target.value);
+    setNewComment(event.target.value);
+  };
+
+  const handleClear = () => {
+    setNewComment("");
+    setIsError(null);
+    setIsPosted(false);
   };
 
   return (
@@ -44,7 +57,7 @@ export default function CommentForm({ article_id }) {
           cols="60"
           name="text"
           placeholder="Enter text"
-          value={comment}
+          value={newComment}
           maxLength={1000}
           onChange={handleChange}
         ></textarea>
@@ -53,17 +66,16 @@ export default function CommentForm({ article_id }) {
         <button type="submit" id="comment-submit-button">
           Submit
         </button>
-        <button
-          type="reset"
-          id="comment-clear-button"
-          onClick={() => setComment("")}
-          onClick={() => setIsError("")}
-          onClick={() => setIsPosted(false)}
-        >
+        <button type="reset" id="comment-clear-button" onClick={handleClear}>
           Clear
         </button>
-        {isPosted ? <p id="form-submission-text">{isPosted}</p> : null}
+        {isPosted ? <p id="form-submission-text">Comment Posted!</p> : null}
       </form>
+      {commentAdded.length
+        ? commentAdded.map((comment) => (
+            <CommentCard comment={comment} key={comment.comment_id} />
+          ))
+        : null}
     </div>
   );
 }

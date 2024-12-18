@@ -285,7 +285,14 @@ button {
 }
 
 /* Comment Form */
+
 .comment-form-wrapper {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.article-comment-form {
   background-color: rgb(253, 184, 116);
   border-radius: 1rem;
   margin: 1rem;
@@ -341,7 +348,7 @@ button {
   font-size: 2rem;
   background-color: rgb(139, 139, 54);
   color: beige;
-
+  max-width: 60vw;
   margin: 1rem;
   padding: 0.5rem;
   border-radius: 1rem;
@@ -400,6 +407,20 @@ button {
   margin: 0;
   padding: 0.6rem;
   border-radius: 1rem;
+}
+
+#delete-comment-button {
+  background-color: rgb(170, 54, 27);
+  color: beige;
+  margin: 0;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+}
+
+#delete-comment-button:hover {
+  background-color: rgb(211, 88, 60);
+  transform: scale(1.1);
 }
 
 /* Error handlers */

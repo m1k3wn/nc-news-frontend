@@ -6,7 +6,6 @@ import { LoadingAnimation } from "./LoadingAnimation";
 // components
 import SingleArticleCard from "./SingleArticleCard";
 import CommentList from "./CommentList";
-import CommentForm from "./CommentForm";
 
 export default function SingleArticle() {
   const [currentArticle, setCurrentArticle] = useState({});
@@ -38,7 +37,7 @@ export default function SingleArticle() {
   return (
     <div className="single-article-page">
       <SingleArticleCard article={currentArticle} />
-      <CommentForm article_id={currentArticle.article_id} />
+
       <CommentList article_id={currentArticle.article_id} />
     </div>
   );
