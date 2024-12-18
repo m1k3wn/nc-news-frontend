@@ -39,3 +39,11 @@ export const getArticleComments = (article_id) => {
       throw error;
     });
 };
+
+export const updateVotesByArticleId = (article_id, increment) => {
+  return newsBaseUrl
+    .patch(`/articles/${article_id}`, { inc_votes: increment })
+    .then(() => {
+      console.log(`votes updated for article id: ${article_id}`);
+    });
+};
