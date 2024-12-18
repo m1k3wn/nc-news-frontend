@@ -32,7 +32,12 @@ export const postArticleComment = (article_id, user, comment) => {
       username: user,
       body: comment,
     })
-    .then(() => {
+    .then(({ data }) => {
       console.log(`comment by: ${user}. Posted to article id: ${article_id}`);
+      return data;
     });
+};
+
+export const deleteArticleComment = (comment_id) => {
+  return newsBaseUrl.delete(`/comments/${comment_id}`);
 };

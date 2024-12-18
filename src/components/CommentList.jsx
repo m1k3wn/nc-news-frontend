@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import CommentCard from "./CommentCard";
 import { getArticleComments } from "../api";
 import { LoadingAnimation } from "./LoadingAnimation";
+import CommentForm from "./CommentForm";
+import { deleteArticleComment } from "../api";
 
 export default function CommentList({ article_id }) {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,18 +28,35 @@ export default function CommentList({ article_id }) {
       .finally(() => setIsLoading(false));
   }, [article_id]);
 
+  // optimistic rendering update of comments list
+  const handleDeleteComment = (comment_id) => {
+    setComments((prevComments) =>
+      prevComments.filter((comment) => comment.comment_id !== comment_id)
+    );
+
+    deleteArticleComment(comment_id)
+      .then(() => {
+        console.log("comment deleted!!");
+      })
+      .catch((error) => {
+        console.log("Error deleting comment: ", error);
+      });
+  };
+
   if (isLoading) return <LoadingAnimation />;
 
   if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="comments-component">
+      <CommentForm article_id={article_id} />
       <ul className="comments-list-component">
         {comments.map((currentComment) => {
           return (
             <CommentCard
               comment={currentComment}
               key={currentComment.comment_id}
+              onDelete={() => handleDeleteComment(currentComment.comment_id)}
             />
           );
         })}
