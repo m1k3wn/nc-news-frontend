@@ -5,7 +5,7 @@ import { LoadingAnimation } from "./LoadingAnimation";
 
 export default function ArticlePage() {
   const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [isError, setIsError] = useState(null);
   const [articles, setArticles] = useState([]);
 
   // fetch all articles
@@ -19,15 +19,15 @@ export default function ArticlePage() {
         return articles;
       })
       .catch((error) => {
-        setIsError(true);
+        setIsError("Failed to fetch articles :( ");
         setIsLoading(false);
-        console.log(error, "<error in items catch");
+        console.log("Error in articles fetch:", error);
       });
   }, []);
 
   if (isLoading) return <LoadingAnimation />;
 
-  if (isError) return <p>Error fetching stuff</p>;
+  if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="articles-page">

@@ -207,11 +207,12 @@ button {
 }
 
 .single-article-title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   border-radius: 1rem;
   background: rgb(59, 59, 59);
   color: rgb(253, 184, 116);
   padding: 1rem;
+  max-width: 80vw;
 }
 
 .single-article-image {
@@ -247,7 +248,7 @@ button {
 .single-article-body {
   font-size: 1.2rem;
   line-height: 2rem;
-  max-width: 50vw;
+  max-width: 60vw;
 }
 
 /* Article Vote Component */
@@ -277,14 +278,76 @@ button {
 .vote-button:disabled {
   background-color: #ccc;
   color: #666;
-  cursor: not-allowed;
 }
 
 #votes-count {
   font-size: 1.2rem;
 }
 
-/* comments components */
+/* Comment Form */
+.comment-form-wrapper {
+  background-color: rgb(253, 184, 116);
+  border-radius: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#comment-form-title {
+  margin-top: 1rem;
+}
+#comment-form-subtitle {
+  font-size: 1.2rem;
+}
+
+#article-comment-form {
+  padding: 2rem;
+  gap: 1rem;
+}
+
+#comment-text-box {
+  font-size: 1rem;
+}
+
+#comment-submit-button {
+  font-size: 2rem;
+  background-color: rgb(139, 139, 54);
+  color: beige;
+
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+#comment-submit-button:hover {
+  background-color: rgb(179, 179, 92);
+  transform: scale(1.1);
+}
+
+#comment-clear-button {
+  font-size: 2rem;
+  background-color: rgb(88, 83, 74);
+  color: beige;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+#comment-clear-button:hover {
+  background-color: rgb(146, 136, 118);
+  transform: scale(1.1);
+}
+
+#form-submission-text {
+  font-size: 2rem;
+  background-color: rgb(139, 139, 54);
+  color: beige;
+
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+}
+
+/* Comments components */
 .comments-list-component {
   border-radius: 1rem;
   display: flex;
@@ -337,4 +400,15 @@ button {
   margin: 0;
   padding: 0.6rem;
   border-radius: 1rem;
+}
+
+/* Error handlers */
+
+.error-message {
+  background-color: rgb(98, 20, 20);
+  color: beige;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 2rem;
 }
