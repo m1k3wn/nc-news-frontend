@@ -14,10 +14,8 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/articles" />} />
           <Route path="/articles" element={<ArticlePage />} />
-          <Route
-            path="/articles/:article_id"
-            element={<SingleArticle />}
-          ></Route>
+          <Route path="/articles/:article_id" element={<SingleArticle />} />
+          <Route path="articles/topics/:topic" element={<ArticlePage />} />
         </Routes>
       </div>
     </>

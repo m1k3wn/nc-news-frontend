@@ -19,5 +19,3 @@ export default function ArticleCard({ article }) {
     </Link>
   );
 }
-
-// add onclick routing <Link>

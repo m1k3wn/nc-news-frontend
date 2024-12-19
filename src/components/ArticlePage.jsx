@@ -2,28 +2,45 @@ import { useState, useEffect } from "react";
 import ArticleList from "./ArticleList";
 import { getArticles } from "../api";
 import { LoadingAnimation } from "./LoadingAnimation";
+import { getArticlesByTopic } from "../api";
+import { useParams } from "react-router";
 
 export default function ArticlePage() {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
   const [articles, setArticles] = useState([]);
 
-  // fetch all articles
+  const { topic } = useParams();
+
   useEffect(() => {
     setIsLoading(true);
-    getArticles()
-      .then(({ articles }) => {
-        setArticles(articles);
-        setIsError(false);
-        setIsLoading(false);
-        return articles;
-      })
-      .catch((error) => {
-        setIsError("Failed to fetch articles :( ");
-        setIsLoading(false);
-        console.log("Error in articles fetch:", error);
-      });
-  }, []);
+    setIsError(null);
+    if (topic) {
+      getArticlesByTopic(topic)
+        .then(({ articles }) => {
+          setArticles(articles);
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setIsError("Failed to fetch articles :( ");
+          setIsLoading(false);
+          console.log("Error in articles fetch:", error);
+        });
+    } else {
+      getArticles()
+        .then(({ articles }) => {
+          setArticles(articles);
+          setIsError(false);
+          setIsLoading(false);
+          return articles;
+        })
+        .catch((error) => {
+          setIsError("Failed to fetch articles :( ");
+          setIsLoading(false);
+          console.log("Error in articles fetch:", error);
+        });
+    }
+  }, [topic]);
 
   if (isLoading) return <LoadingAnimation />;
 
@@ -31,7 +48,12 @@ export default function ArticlePage() {
 
   return (
     <div className="articles-page">
-      <h1 className="articles-title">Showing All Articles</h1>
+      {topic ? (
+        <h1 className="articles-title">Showing All {topic} Articles</h1>
+      ) : (
+        <h1 className="articles-title">Showing All Articles</h1>
+      )}
+
       <ArticleList articles={articles} />
     </div>
   );
