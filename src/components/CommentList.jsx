@@ -19,7 +19,7 @@ export default function CommentList({ article_id }) {
         setComments(comments);
         setIsError(false);
         setIsLoading(false);
-        return comments;
+        // return comments;
       })
       .catch((error) => {
         setIsError("Failed to load comments, boo...");
@@ -27,6 +27,11 @@ export default function CommentList({ article_id }) {
       })
       .finally(() => setIsLoading(false));
   }, [article_id]);
+
+  // FUNCTION to handle state: pass down to commentCard and commentForm wrapped in callback
+  const addComment = (newComment) => {
+    setComments((prevComments) => [newComment, ...prevComments]);
+  };
 
   // optimistic rendering update of comments list
   const handleDeleteComment = (comment_id) => {
@@ -43,19 +48,20 @@ export default function CommentList({ article_id }) {
       });
   };
 
-  if (isLoading) return <LoadingAnimation />;
+  if (isLoading) return <LoadingAnimation />;    
 
   if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="comments-component">
-      <CommentForm article_id={article_id} />
+      <CommentForm article_id={article_id} addComment={addComment} />
       <ul className="comments-list-component">
         {comments.map((currentComment) => {
           return (
             <CommentCard
               comment={currentComment}
               key={currentComment.comment_id}
+              // pass down to comment card with current comment_id, delay invocation
               onDelete={() => handleDeleteComment(currentComment.comment_id)}
             />
           );

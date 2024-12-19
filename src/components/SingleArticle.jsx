@@ -41,4 +41,4 @@ export default function SingleArticle() {
       <CommentList article_id={currentArticle.article_id} />
     </div>
   );
-}
+}  
