@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { UserContext } from "../context/userContext";
 import DeleteComment from "./DeleteComment";
-
 import { dateConverter } from "../utils";
+
 export default function CommentButtonBar({ comment, onDelete }) {
   const { user } = useContext(UserContext);
 

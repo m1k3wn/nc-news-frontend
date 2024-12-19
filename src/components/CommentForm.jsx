@@ -1,15 +1,12 @@
-import { useState } from "react";
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { postArticleComment } from "../api";
 import CommentCard from "./CommentCard";
 
-export default function CommentForm({ article_id }) {
+export default function CommentForm({ article_id, addComment }) {
   const { user } = useContext(UserContext);
   const [newComment, setNewComment] = useState("");
   const [isPosted, setIsPosted] = useState(false);
-  // gathers new comments to optimistically render
-  const [commentAdded, setCommentAdded] = useState([]);
   const [isError, setIsError] = useState(null);
 
   const handleSubmit = (event) => {
@@ -24,12 +21,11 @@ export default function CommentForm({ article_id }) {
       .then(({ comment }) => {
         setNewComment("");
         setIsPosted(true);
-        setCommentAdded((prevComments) => [comment, ...prevComments]);
         setIsError(null);
+        addComment(comment);
       })
       .catch((error) => {
         setIsError("Failed to Submit Comment, soz :(");
-        setCommentAdded(null);
         setIsPosted(false);
         console.log("Error posting comment: ", error);
       });
@@ -71,11 +67,6 @@ export default function CommentForm({ article_id }) {
         </button>
         {isPosted ? <p id="form-submission-text">Comment Posted!</p> : null}
       </form>
-      {commentAdded.length
-        ? commentAdded.map((comment) => (
-            <CommentCard comment={comment} key={comment.comment_id} />
-          ))
-        : null}
     </div>
   );
 }
