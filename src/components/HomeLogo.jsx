@@ -4,7 +4,7 @@ export default function HomeLogo() {
   return (
     <div>
       <Link to={"/"} className="home-logo-link">
-        Home Logo Here
+        Good News
       </Link>
     </div>
   );
