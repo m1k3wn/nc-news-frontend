@@ -9,6 +9,7 @@ export default function CommentList({ article_id }) {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(null);
   const [comments, setComments] = useState([]);
+  const [deleteError, setDeleteError] = useState(null);
 
   useEffect(() => {
     //prevents unresolved article_id being passed to Axios fetcher
@@ -28,33 +29,43 @@ export default function CommentList({ article_id }) {
       .finally(() => setIsLoading(false));
   }, [article_id]);
 
-  // FUNCTION to handle state: pass down to commentCard and commentForm wrapped in callback
+  // State handler: passes down to commentCard and commentForm wrapped in callback
   const addComment = (newComment) => {
     setComments((prevComments) => [newComment, ...prevComments]);
   };
 
-  // optimistic rendering update of comments list
   const handleDeleteComment = (comment_id) => {
+    // optimistically render failed delete
+    const restoredComment = comments.find(
+      (comment) => comment.comment_id === comment_id
+    );
+    // optimistically render comment removal
     setComments((prevComments) =>
       prevComments.filter((comment) => comment.comment_id !== comment_id)
     );
 
     deleteArticleComment(comment_id)
       .then(() => {
-        console.log("comment deleted!!");
+        setDeleteError(false);
       })
       .catch((error) => {
-        console.log("Error deleting comment: ", error);
+        setDeleteError("Couldn't delete right now, soz bae");
+        setComments((prevComments) => [restoredComment, ...prevComments]);
+
+        setTimeout(() => {
+          setDeleteError(null);
+        }, 2000);
       });
   };
 
-  if (isLoading) return <LoadingAnimation />;    
+  if (isLoading) return <LoadingAnimation />;
 
   if (isError) return <p className="error-message">{isError}</p>;
 
   return (
     <div className="comments-component">
       <CommentForm article_id={article_id} addComment={addComment} />
+      {deleteError ? <p className="error-message">{deleteError}</p> : null}
       <ul className="comments-list-component">
         {comments.map((currentComment) => {
           return (

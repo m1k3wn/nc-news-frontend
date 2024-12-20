@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router";
 import { Navigate } from "react-router";
 import ArticlePage from "./components/ArticlePage";
 import SingleArticle from "./components/SingleArticle";
+import PageNotFound from "./components/PageNotFound";
 
 import "./App.css";
 
@@ -16,6 +17,7 @@ function App() {
           <Route path="/articles" element={<ArticlePage />} />
           <Route path="/articles/:article_id" element={<SingleArticle />} />
           <Route path="articles/topics/:topic" element={<ArticlePage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
     </>

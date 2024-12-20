@@ -27,12 +27,19 @@ export default function SingleArticle() {
       })
       .catch((error) => {
         setIsError("Coudln't find this article, sorry bae");
+        setIsLoading(false);
         console.log("Error in single article fetch: ", error);
       });
   }, []);
 
   if (isLoading) return <LoadingAnimation />;
-  if (isError) return <p className="error-message">{isError}</p>;
+  if (isError)
+    return (
+      <div className="error-page">
+        <p className="error-message">{isError}</p>
+        <button className="go-back-button" onClick={() => window.history.back()}>Go Back</button>
+      </div>
+    );
 
   return (
     <div className="single-article-page">
@@ -41,4 +48,4 @@ export default function SingleArticle() {
       <CommentList article_id={currentArticle.article_id} />
     </div>
   );
-}  
+}
