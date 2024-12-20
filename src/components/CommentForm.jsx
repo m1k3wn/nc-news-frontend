@@ -1,7 +1,6 @@
 import { useState, useContext } from "react";
 import { UserContext } from "../context/userContext";
 import { postArticleComment } from "../api";
-import CommentCard from "./CommentCard";
 
 export default function CommentForm({ article_id, addComment }) {
   const { user } = useContext(UserContext);
@@ -23,6 +22,9 @@ export default function CommentForm({ article_id, addComment }) {
         setIsPosted(true);
         setIsError(null);
         addComment(comment);
+        setTimeout(() => {
+          setIsPosted(false);
+        }, 3000);
       })
       .catch((error) => {
         setIsError("Failed to Submit Comment, soz :(");
@@ -57,14 +59,15 @@ export default function CommentForm({ article_id, addComment }) {
           maxLength={1000}
           onChange={handleChange}
         ></textarea>
-        <p id="comment-error">{isError}</p>
-
-        <button type="submit" id="comment-submit-button">
-          Submit
-        </button>
-        <button type="reset" id="comment-clear-button" onClick={handleClear}>
-          Clear
-        </button>
+        {isError ? <p className="error-message">{isError}</p> : null}
+        <div className="form-button-group">
+          <button type="submit" id="comment-submit-button">
+            Submit
+          </button>
+          <button type="reset" id="comment-clear-button" onClick={handleClear}>
+            Clear
+          </button>
+        </div>
         {isPosted ? <p id="form-submission-text">Comment Posted!</p> : null}
       </form>
     </div>

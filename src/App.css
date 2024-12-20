@@ -4,7 +4,7 @@
 #root {
   margin: 0 auto;
   text-align: center;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   color: black;
   font-family: Arial, Helvetica, sans-serif;
   text-decoration: none;
@@ -40,7 +40,7 @@ button {
 /* Header components */
 .header-component {
   /* border-radius: 1rem; */
-  background: grey;
+  background: rgb(244, 234, 202);
   box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
@@ -100,11 +100,12 @@ button {
 }
 #header-user-name {
   font-size: 1.5rem;
+  color: rgb(87, 90, 14);
 }
 /* Articles components */
 
 .articles-page {
-  border: 1rem solid rgb(253, 184, 116);
+  /* border: 1rem solid rgb(253, 184, 116); */
   border-radius: 2rem;
   box-sizing: border-box;
   margin-top: 1rem;
@@ -119,10 +120,11 @@ button {
 
 .articles-title {
   line-height: 3rem;
+  color: rgb(87, 90, 14);
 }
 
 .articles-list-component {
-  background-color: rgb(86, 86, 86);
+  /* background-color: rgb(87, 90, 14); */
   border-radius: 1rem;
   margin: 0 auto;
   padding: 0;
@@ -137,7 +139,9 @@ button {
 
 /* Article Summary card */
 .article-card {
-  background-color: rgb(228, 218, 188);
+  border: 0.3rem solid rgb(253, 184, 116);
+  background-color: rgb(244, 234, 202);
+  color: rgb(62, 64, 2);
   border-radius: 1rem;
   list-style-type: none;
   padding: 0.4rem;
@@ -147,7 +151,7 @@ button {
   display: flex;
   flex-direction: column;
   width: auto;
-  height: auto;
+  height: 515px;
   box-sizing: border-box;
   overflow: hidden;
   gap: 1rem;
@@ -155,7 +159,8 @@ button {
 
 .article-card:hover {
   background-color: rgb(255, 247, 224);
-  transform: scale(1.1);
+  border: 0.3rem solid rgb(134, 157, 18);
+  transform: scale(1.05);
   color: rgb(193, 123, 52);
 }
 
@@ -223,7 +228,7 @@ button {
 }
 .single-article-card {
   border-radius: 1rem;
-  background: rgb(222, 208, 199);
+  background: rgb(255, 246, 216);
   justify-content: center;
   align-items: center;
   display: flex;
@@ -238,8 +243,8 @@ button {
 .single-article-title {
   font-size: 2.5rem;
   border-radius: 1rem;
-  background: rgb(59, 59, 59);
-  color: rgb(253, 184, 116);
+  background: rgb(79, 83, 1);
+  color: rgb(254, 199, 143);
   padding: 1rem;
   max-width: 80vw;
 }
@@ -268,6 +273,9 @@ button {
   padding: 0.5rem;
 }
 
+.article-vote-card {
+  /* max-width: 40%; */
+}
 .article-vote-button {
   border-radius: 1rem;
   background: rgb(161, 230, 164);
@@ -339,7 +347,10 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
 }
+
 #comment-form-title {
   margin-top: 1rem;
 }
@@ -347,13 +358,15 @@ button {
   font-size: 1.2rem;
 }
 
-#article-comment-form {
-  padding: 2rem;
-  gap: 1rem;
-}
-
 #comment-text-box {
   font-size: 1rem;
+}
+
+.form-button-group {
+  display: flex;
+  flex-direction: row; /* Horizontal alignment */
+  justify-content: center;
+  gap: 1rem;
 }
 
 #comment-submit-button {
@@ -418,10 +431,11 @@ button {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 70%;
+  max-width: 80%;
   width: 100%;
   margin: 0 auto;
   padding: 1rem;
+  box-sizing: border-box;
   gap: 1rem;
 }
 
@@ -492,7 +506,7 @@ button {
 
 /* Sort By Component */
 .sorting-bar {
-  background-color: pink;
+  background-color: rgb(253, 184, 116);
   border-radius: 2rem;
   padding: 0.5rem;
   display: flex;
@@ -530,15 +544,41 @@ button {
   margin: 1rem;
   padding: 0.5rem;
   border-radius: 1rem;
-  font-size: 2rem;
+  font-size: 1rem;
+  /* max-width: 40vw; */
 }
 
+.go-back-button {
+  background-color: rgb(58, 105, 2);
+  color: beige;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+}
+.go-back-button:hover {
+  background-color: rgb(94, 147, 29);
+  transform: scale(1.1);
+}
+
+#error-404--header {
+  background-color: rgb(98, 20, 20);
+  color: beige;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  font-size: 1rem;
+}
 /* Media Rules */
 
 @media (max-width: 700px) {
   body {
     padding: 0;
+    margin: 0 autp;
   }
+  /* .error-message {
+    width: vw;
+  } */
   .header-component {
     flex-direction: column;
     align-items: center;
@@ -564,16 +604,15 @@ button {
   }
   .article-card {
     width: 80vw;
+    height: auto;
     padding: 1rem 0;
     line-height: 1rem;
   }
-  /* .articles-title {
-    font-size: 1.5rem;
-  } */
+
   a {
     width: 80%;
   }
-  /* .article-buttons-bar, */
+
   .single-article-image,
   .single-article-card {
     width: 100vw;
@@ -594,14 +633,34 @@ button {
   }
   .article-comment-form {
     width: 70vw;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* flex-direction: column; */
+  }
+  .form-button-group {
+    width: 70vw;
+    margin: 0;
+    padding: 0;
   }
   .comments-list-component {
-    width: 120vw;
+    width: 90%;
     margin: 0 auto;
     box-sizing: border-box;
   }
+  .comment-form-wrapper {
+    margin: 0;
+    width: 80vw;
+  }
+  .comments-component {
+    width: 80vw;
+  }
   .comment-button-bar {
     flex-direction: column;
+  }
+  .comment-card {
+    max-width: 100%;
+    width: auto;
   }
 
   #comment-text-box {

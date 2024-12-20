@@ -40,14 +40,22 @@ export default function ArticlePage() {
         setIsLoading(false);
       })
       .catch((error) => {
-        setIsError("Failed to fetch articles :( ");
+        setIsError("Couldn't find any articles, soz :(");
         setIsLoading(false);
         console.log("Error in articles fetch:", error);
       });
   }, [topic, sortedBy]);
 
   if (isLoading) return <LoadingAnimation />;
-  if (isError) return <p className="error-message">{isError}</p>;
+  if (isError)
+    return (
+      <div className="error-page">
+        <p className="error-message">{isError}</p>
+        <button className="go-back-button" onClick={() => window.history.back()}>
+          Go Back
+        </button>
+      </div>
+    );
 
   return (
     <div className="articles-page">

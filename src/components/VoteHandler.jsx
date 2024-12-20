@@ -8,21 +8,38 @@ export default function VoteHandler({ votes, article_id }) {
   const [hasDownVoted, setHasDownVoted] = useState(false);
 
   function handleClick(increment) {
-    updateVotesByArticleId(article_id, increment).catch((error) => {
-      setVotesAdded((currentVotesAdded) => {
-        setIsError("Your vote was not successful. Please try again!");
-        console.log("Error handling vote: ", error);
-        return currentVotesAdded - 1;
-      });
+    // Prevent duplicate votes
+    if ((increment > 0 && hasUpVoted) || (increment < 0 && hasDownVoted)) {
+      return;
+    }
+
+    let voteChange = increment;
+
+    if (increment > 0 && hasDownVoted) {
+      voteChange = 2;
+    } else if (increment < 0 && hasUpVoted) {
+      voteChange = -2;
+    }
+
+    setVotesAdded((currentVotesAdded) => currentVotesAdded + voteChange);
+
+    updateVotesByArticleId(article_id, voteChange).catch((error) => {
+      setIsError("Can't vote right now!");
+      setVotesAdded(0);
+      setTimeout(() => {
+        setIsError(null);
+      }, 4000);
     });
-    increment > 0
-      ? setVotesAdded((currentVotesAdded) => {
-          return currentVotesAdded + 1;
-        })
-      : setVotesAdded((currentVotesAdded) => {
-          return currentVotesAdded - 1;
-        });
+
+    if (increment > 0) {
+      setHasUpVoted(true);
+      setHasDownVoted(false);
+    } else {
+      setHasUpVoted(false);
+      setHasDownVoted(true);
+    }
   }
+
   return (
     <div className="article-vote-card">
       <p id="votes-count">Votes: {votes + votesAdded} </p>
@@ -31,8 +48,6 @@ export default function VoteHandler({ votes, article_id }) {
         className="vote-button"
         onClick={() => {
           handleClick(1);
-          setHasUpVoted(true);
-          setHasDownVoted(false);
         }}
         disabled={hasUpVoted}
       >
@@ -42,8 +57,6 @@ export default function VoteHandler({ votes, article_id }) {
         className="vote-button"
         onClick={() => {
           handleClick(-1);
-          setHasDownVoted(true);
-          setHasUpVoted(false);
         }}
         disabled={hasDownVoted}
       >

@@ -1,5 +1,3 @@
-import { deleteArticleComment } from "../api";
-
 export default function DeleteComment({ onDelete }) {
   const handleDelete = (event) => {
     event.preventDefault();
