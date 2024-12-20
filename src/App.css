@@ -16,14 +16,6 @@
   box-sizing: border-box;
 }
 
-ul,
-ol {
-  margin: 0; /* Remove default margin */
-  padding: 0; /* Remove default padding */
-}
-
-/* default link styling */
-
 a {
   text-decoration: none;
   color: inherit;
@@ -92,19 +84,23 @@ button {
 }
 
 .header-user-logo {
-  padding: 1rem;
+  padding: 0.5rem;
   background-color: rgb(253, 184, 116);
   border-radius: 1rem;
   margin-left: auto;
   box-sizing: border-box;
   line-height: 1rem;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  /* white-space: nowrap; */
 }
-
+#header-user-welcome {
+}
+#header-user-name {
+  font-size: 1.5rem;
+}
 /* Articles components */
 
 .articles-page {
@@ -494,6 +490,38 @@ button {
   background-color: rgb(138, 138, 44);
 }
 
+/* Sort By Component */
+.sorting-bar {
+  background-color: pink;
+  border-radius: 2rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  margin: 0.5rem;
+  gap: 1vw;
+}
+#sort-by-label {
+  line-height: 2rem;
+  padding: 0.2rem;
+}
+
+.sort-button {
+  color: white;
+  background-color: rgb(115, 124, 13);
+  border-radius: 2rem;
+  padding: 1rem;
+}
+
+.sort-button:hover {
+  background-color: rgb(138, 138, 44);
+}
+.sort-button-active {
+  color: white;
+  border-radius: 2rem;
+  padding: 1rem;
+  background-color: rgb(143, 127, 102);
+}
+
 /* Error handlers */
 
 .error-message {
@@ -525,9 +553,9 @@ button {
 
   .home-logo-link,
   .header-user-logo {
-    margin: 0 auto; /* Center within parent */
-    text-align: center; /* Center content inside */
-    padding: 0.5rem; /* Adjust inner spacing */
+    margin: 0 auto;
+    text-align: center;
+    padding: 0.5rem;
   }
   .articles-page,
   .articles-list-component {
@@ -539,6 +567,9 @@ button {
     padding: 1rem 0;
     line-height: 1rem;
   }
+  /* .articles-title {
+    font-size: 1.5rem;
+  } */
   a {
     width: 80%;
   }
@@ -575,5 +606,24 @@ button {
 
   #comment-text-box {
     width: 90vw;
+  }
+
+  .sorting-bar {
+    width: 90vw;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  .sort-button,
+  .sort-button-active {
+    padding: 0.5rem;
+    line-height: 1.3rem;
+    border-radius: 1rem;
+    margin: 1vw;
+  }
+
+  #sort-by-label {
+    line-height: 1rem;
+    margin-top: 0.6rem;
   }
 }

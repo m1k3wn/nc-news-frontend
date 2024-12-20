@@ -4,8 +4,9 @@ import { UserContext } from "../context/userContext";
 export default function UserLogo() {
   const { user } = useContext(UserContext);
   return (
-    <>
-      <h2 className="header-user-logo"> Welcome {user}</h2>
-    </>
+    <div className="header-user-logo">
+      <p id="header-user-welcome"> Hey there</p>
+      <p id="header-user-name"> {user}</p>
+    </div>
   );
 }

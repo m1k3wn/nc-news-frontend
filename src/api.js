@@ -5,14 +5,24 @@ const newsBaseUrl = axios.create({
 });
 
 /* Articles Utils */
-export const getArticles = () => {
-  return newsBaseUrl.get("/articles").then(({ data }) => data);
+
+export const getArticles = (sortParam = "votes&order=DESC") => {
+  return newsBaseUrl
+    .get(`/articles?sort_by=${sortParam}`)
+    .then(({ data }) => data);
 };
 
 export const getArticleById = (article_id) => {
   return newsBaseUrl.get(`/articles/${article_id}`).then(({ data }) => data);
 };
 
+export const getArticlesByTopic = (topic, sortParam = "votes") => {
+  return newsBaseUrl
+    .get(`/articles?topic=${topic}&sort_by=${sortParam}`)
+    .then(({ data }) => data);
+};
+
+/* Votes */
 export const updateVotesByArticleId = (article_id, increment) => {
   return newsBaseUrl
     .patch(`/articles/${article_id}`, { inc_votes: increment })
@@ -48,8 +58,4 @@ export const deleteArticleComment = (comment_id) => {
 
 export const getAllTopics = () => {
   return newsBaseUrl.get("/topics").then(({ data }) => data);
-};
-
-export const getArticlesByTopic = (topic) => {
-  return newsBaseUrl.get(`/articles?topic=${topic}`).then(({ data }) => data);
 };
